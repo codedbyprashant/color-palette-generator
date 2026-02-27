@@ -44,7 +44,7 @@ export default function SavedPalettes({ savedPalettes, onDelete, onCopy }) {
             </div>
             <button
               onClick={() => onDelete(saved.id)}
-              className="px-3 py-1.5 text-sm text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+              className="px-3 py-1.5 text-sm text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
             >
               Delete
             </button>
