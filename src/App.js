@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ColorCard from './components/ColorCard';
 import SavedPalettes from './components/SavedPalettes';
 import ExportModal from './components/ExportModal';
 import Toast from './components/Toast';
 import { generatePalette } from './utils/colorUtils';
 
-let toastCounter = 0;
-
 export default function App() {
+  const toastCounterRef = useRef(0);
   const [palette, setPalette] = useState([]);
   const [colorCount, setColorCount] = useState(5);
   const [savedPalettes, setSavedPalettes] = useState(() => {
@@ -38,7 +37,7 @@ export default function App() {
     localStorage.setItem('cpg-saved', JSON.stringify(savedPalettes));
   }, [savedPalettes]);
 
-  // Generate initial palette
+  // Generate initial palette on mount only
   useEffect(() => {
     setPalette(generatePalette(colorCount, []));
     // eslint-disable-next-line
@@ -68,7 +67,7 @@ export default function App() {
   }, [colorCount]);
 
   function addToast(message) {
-    const id = ++toastCounter;
+    const id = ++toastCounterRef.current;
     setToasts((prev) => [...prev, { id, message }]);
   }
 
